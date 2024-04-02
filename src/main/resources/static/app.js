@@ -111,7 +111,7 @@ function hideForm() {
  * more about the integration of OpenVidu i2n your application server.
  */
 
-var APPLICATION_SERVER_URL = "http://localhost:4443";
+var APPLICATION_SERVER_URL = "http://localhost:8080";
 
 function getToken(mySessionId) {
     return createSession(mySessionId).then(sessionId => createToken(sessionId));
