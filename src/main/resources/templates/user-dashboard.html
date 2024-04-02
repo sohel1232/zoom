@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Homepage</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+
+        .main {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+        }
+
+        .container {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+        }
+
+        .right-container {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+
+
+        button:hover {
+            background-color: #3e8e41;
+            border-color: #3e8e41;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .meeting-list {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .meeting-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .meeting-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #252525;
+            border-radius: 5px;
+        }
+
+        .meeting-list form {
+            display: flex;
+            align-items: center;
+        }
+
+        .meetingbtn{
+            display: flex;
+        }
+
+        .right-content{
+            width: 80%;
+            height: 60%;
+            border: 2px solid #737f86 ;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 12px;
+
+        }
+
+        .meeting-list button {
+            width: 89px;
+            height: 40px;
+            padding: 5px;
+            margin-left: 10px;
+            border: 1px solid #1991d1;
+            border-radius: 12px;
+            color: #fff;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .meeting-list button:hover {
+            background-color:#1991d1 ;
+            color: black;
+        }
+
+        img {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+        }
+
+        a {
+            margin: 15px;
+        }
+
+        p {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main">
+    <div class="container">
+        <h2>Welcome to Zoom</h2>
+
+        <div class="button-container">
+            <a th:href="@{/newMeeting}">
+                <img
+                        src="https://cdn.discordapp.com/attachments/1222406901002797170/1224685616449458276/join-logo.png?ex=661e645c&is=660bef5c&hm=7a2cc49d3ff19007036e669536a2f8908f6d0da0d1904f7e413448a2524c1be7&">
+                <p>New Meeting</p>
+            </a>
+            <a th:href="@{/newMeeting}">
+                <img
+                        src="https://cdn.discordapp.com/attachments/1222406901002797170/1224685616705437726/camera-logo.jpeg?ex=661e645c&is=660bef5c&hm=885466248fdc2aca5a4ec166899a674746e1957ef57f0467ef505913971c7c1d&">
+                <p>Join meeting</p>
+            </a>
+            <a th:href="@{/scheduleMeeting}">
+                <img
+                        src="https://cdn.discordapp.com/attachments/1222406901002797170/1224686035473272922/calender.webp?ex=661e64c0&is=660befc0&hm=71b5371abbf664c7995e844bcf73ea92a90ace4bb4e8e241adcff9d8732cdefe&">
+                <p>Schedule meeting</p>
+            </a>
+
+        </div>
+    </div>
+    <div class="right-container">
+
+        <div class="right-content">
+
+
+
+            <h2>Current Time</h2>
+            <p th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></p>
+
+
+            <div class="meeting-list">
+                <h3>Scheduled Meetings</h3>
+                <ul>
+                    <th:block th:each="meeting : ${scheduledMeetings}">
+                        <li
+                                th:text="${meeting.title + ' - ' + meeting.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('hh:mm a'))}">
+                        </li>
+                        <div class="meetingbtn">
+                            <form th:action="@{/meeting-controller/startScheduledMeeting}">
+                                <input type="hidden" th:name="meetingId" th:value="${meeting.id}">
+                                <button>Start</button>
+                            </form>
+                            <form th:action="@{/meeting-controller/deleteScheduledMeeting}">
+                                <input type="hidden" th:name="meetingId" th:value="${meeting.id}">
+                                <button>Cancel</button>
+                            </form>
+                        </div>
+
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+
+</html>

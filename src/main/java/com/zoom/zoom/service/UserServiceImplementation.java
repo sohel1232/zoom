@@ -5,6 +5,8 @@ import com.zoom.zoom.entity.User;
 import com.zoom.zoom.repository.MeetingRepository;
 import com.zoom.zoom.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +39,13 @@ public class UserServiceImplementation implements UserService{
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+        User currentLoggedInUser = userRepository.findByEmail(userEmail);
+        return currentLoggedInUser;
     }
 }
