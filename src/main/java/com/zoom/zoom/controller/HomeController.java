@@ -39,18 +39,18 @@ public class HomeController {
         return "sign-in";
     }
 
-//    @GetMapping("/userDashboard")
-//    public String userDashboard(Model model){
-//        User currentLoggedInUser = userService.getCurrentUser();
-//        if(currentLoggedInUser==null){
-//            System.out.println("Please Login first");
-//            return "sign-in";
-//        }
-//        Integer userId = currentLoggedInUser.getId();
-//        List<Meeting> scheduledMeetings = meetingService.getAllScheduledMeetingsByHostId(userId);
-//        System.out.println("MEETINGS : " + scheduledMeetings);
-//        model.addAttribute("scheduledMeetings", scheduledMeetings);
-//        return "user-dashboard";
-//    }
+    @GetMapping("/userDashboard")
+    public String userDashboard(Model model){
+        User currentLoggedInUser = userService.getCurrentUser();
+        if(currentLoggedInUser==null){
+            System.out.println("Please Login first");
+            return "sign-in";
+        }
+        Integer userId = currentLoggedInUser.getId();
+        List<Meeting> scheduledMeetings = meetingService.getAllScheduledMeetingsByHostId(userId);
+        System.out.println("MEETINGS : " + scheduledMeetings);
+        model.addAttribute("scheduledMeetings", scheduledMeetings);
+        return "user-dashboard";
+    }
 
 }
