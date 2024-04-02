@@ -16,6 +16,7 @@ public class MeetingRestController {
 
     @GetMapping
     public ResponseEntity<List<Meeting>> getAllMeetings() {
+        System.out.println("INSIDE MEETINF REST CONTROLLER");
         List<Meeting> meetings = meetingService.getAllScheduledMeetings();
         return ResponseEntity.ok(meetings);
     }
