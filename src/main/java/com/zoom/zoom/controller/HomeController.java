@@ -30,15 +30,10 @@ public class HomeController {
         return "home";
     }
 
-//    @GetMapping("/newMeeting")
-//    public String newMeeting(Model model){
-//        User currentLoggedInUser = userService.getCurrentUser();
-//        if(currentLoggedInUser==null){
-//            return "redirect:/index.html";
-//        }
-//        model.addAttribute("username",currentLoggedInUser.getEmail());
-//        return "redirect:/index.html?username=" + currentLoggedInUser.getEmail();
-//    }
+    @GetMapping("/newMeeting")
+    public String newMeeting(Model model){
+        return "redirect:/index.html";
+    }
 
     @GetMapping("/signIn")
     public String signIn() {
