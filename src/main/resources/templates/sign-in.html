@@ -85,9 +85,17 @@
             color: red;
             margin-top: 10px;
         }
+        h1 {
+            font-size: 60px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 50px;
+        }
+
     </style>
 </head>
 <body>
+<h1>ZOOM</h1>
 <div class="container">
     <h2>Sign In</h2>
     <form th:action="@{/authenticateTheUser}" method="POST">
@@ -103,8 +111,6 @@
         <div th:if="${error}" class="error-message">
             <p th:text="${error}"></p>
         </div>
-
-        <a th:href="@{/oauth2/authorization/google}">Sign in with Google</a>
 
     </form>
 </div>
