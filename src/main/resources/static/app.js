@@ -111,7 +111,7 @@ function hideForm() {
  * more about the integration of OpenVidu i2n your application server.
  */
 
-var APPLICATION_SERVER_URL = "https://f718-203-192-244-188.ngrok-free.app";
+var APPLICATION_SERVER_URL = "http://localhost:4443";
 
 function getToken(mySessionId) {
     return createSession(mySessionId).then(sessionId => createToken(sessionId));
