@@ -31,7 +31,7 @@ public class HomeController {
 
     @GetMapping("/newMeeting")
     public String newMeeting(Model model){
-        return "redirect:/index.html";
+        return "redirect:/newMeeting.html";
     }
 
     @GetMapping("/joinMeeting")
