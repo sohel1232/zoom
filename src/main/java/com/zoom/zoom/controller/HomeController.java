@@ -31,7 +31,7 @@ public class HomeController {
 
     @GetMapping("/newMeeting")
     public String newMeeting(Model model){
-        return "redirect:/index.html";
+        return "redirect:/WEB_UIKITS.html";
     }
 
     @GetMapping("/signIn")
