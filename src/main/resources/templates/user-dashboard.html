@@ -190,7 +190,7 @@
                 <ul>
                     <th:block th:each="meeting : ${scheduledMeetings}">
                         <li
-                                th:text="${meeting.title + ' - ' + meeting.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('hh:mm a'))}">
+                                th:text="${meeting.title + ' - ' + meeting.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('MMMM d, yyyy - hh:mm a'))}"
                         </li>
                         <div class="meetingbtn">
                             <form th:action="@{/meeting-controller/startScheduledMeeting}">
