@@ -34,6 +34,11 @@ public class HomeController {
         return "redirect:/newMeeting.html";
     }
 
+    @GetMapping("/joinMeeting")
+    public String joinMeeting(Model model){
+        return "join-meeting";
+    }
+
     @GetMapping("/signIn")
     public String signIn() {
         return "sign-in";
