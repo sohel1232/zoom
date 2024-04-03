@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             background-color: #000;
+            height:50%;
         }
 
         .main {
@@ -46,8 +47,6 @@
             justify-content: center;
             margin-bottom: 20px;
         }
-
-
 
         button:hover {
             background-color: #3e8e41;
@@ -118,7 +117,7 @@
 
         }
 
-        .meeting-list button {
+        .meeting-list button , .log--out {
             width: 89px;
             height: 40px;
             padding: 5px;
@@ -149,6 +148,9 @@
         p {
             margin-left: 5px;
         }
+        .log--out{
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -178,11 +180,7 @@
         </div>
     </div>
     <div class="right-container">
-
         <div class="right-content">
-
-
-
             <h2>Current Time</h2>
             <p th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></p>
 
@@ -209,8 +207,14 @@
                 </ul>
             </div>
         </div>
+
+        <form   th:action="@{/logout}">
+            <button class="log--out" >Logout</button>
+        </form>
     </div>
 </div>
+<div>
+
 </div>
 
 </body>
