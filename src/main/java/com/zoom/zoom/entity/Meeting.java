@@ -11,39 +11,43 @@ public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer hostId;
+
+    @ManyToOne
+    @JoinColumn(name = "host_id")
+    private User host;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "dateTime")
     private LocalDateTime dateTime;
+
+    @Column(name = "duration")
     private Integer duration;
-    private String invitees;
-    private String session;
+
+    @ManyToMany()
+    @JoinTable(name = "invites",
+            joinColumns = @JoinColumn(name = "meeting_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> invitedUsers;
 
     public Meeting() {
     }
 
-    public Meeting(Integer hostId, String title, LocalDateTime dateTime, Integer duration, String invitees, String session) {
-        this.hostId = hostId;
-        this.title = title;
-        this.dateTime = dateTime;
-        this.duration = duration;
-        this.invitees = invitees;
-        this.session = session;
+    public List<User> getInvitedUsers() {
+        return invitedUsers;
     }
 
-    public List<String> getInviteesAsList() {
-        return List.of(invitees.split(","));
+    public void setInvitedUsers(List<User> invitedUsers) {
+        this.invitedUsers = invitedUsers;
     }
 
-    public void setInvitees(String invitees) {
-        this.invitees = invitees;
+    public User getHost() {
+        return host;
     }
 
-    public Integer getHostId() {
-        return hostId;
-    }
-
-    public void setHostId(Integer hostId) {
-        this.hostId = hostId;
+    public void setHost(User host) {
+        this.host = host;
     }
 
     public String getTitle() {
@@ -60,18 +64,6 @@ public class Meeting {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public String getInvitees() {
-        return invitees;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
     }
 
     public Integer getId() {

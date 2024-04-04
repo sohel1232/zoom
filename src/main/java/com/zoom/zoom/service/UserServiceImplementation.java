@@ -48,4 +48,14 @@ public class UserServiceImplementation implements UserService{
         User currentLoggedInUser = userRepository.findByEmail(userEmail);
         return currentLoggedInUser;
     }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
 }

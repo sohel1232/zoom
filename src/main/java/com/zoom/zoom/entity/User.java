@@ -1,6 +1,10 @@
 package com.zoom.zoom.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "users")
@@ -12,7 +16,16 @@ public class User {
     @Column(name = "name")
     private String email;
 
+    @Column(name = "password")
     private String password;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "invites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "meeting_id")
+    )
+    private List<Meeting> invitedMeetings;
 
     public User() {
     }
@@ -20,6 +33,15 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+
+    public List<Meeting> getInvitedMeetings() {
+        return invitedMeetings;
+    }
+
+    public void setInvitedMeetings(List<Meeting> invitedMeetings) {
+        this.invitedMeetings = invitedMeetings;
     }
 
     public String getPassword() {

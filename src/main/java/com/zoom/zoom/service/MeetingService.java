@@ -15,4 +15,6 @@ public interface MeetingService {
     void delete(Meeting meeting);
 
     List<Meeting> getAllScheduledMeetingsByHostId(Integer userId);
+
+
 }

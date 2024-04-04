@@ -69,6 +69,8 @@
             <input type="text" id="title" name="title" th:field="*{title}"><br>
             <label for="datetime">Date and Time:</label><br>
             <input type="datetime-local" id="datetime" name="datetime" th:field="*{dateTime}"><br>
+            <label for="invitees">Invitees:</label><br>
+            <input type="text" id="invitees" name="invitees"><br>
             <label for="duration">Duration (minutes):</label><br>
             <input type="number" id="duration" name="duration" th:field="*{duration}"><br><br>
             <button type="submit">Schedule Meeting</button>
@@ -76,5 +78,10 @@
     </div>
 </div>
 
+    <div>
+        <form th:action="@{/userDashboard}">
+            <button type="button">Cancel</button>
+        </form>
+    </div>
 </body>
 </html>
