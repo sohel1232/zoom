@@ -71,6 +71,7 @@
             font-weight: bold;
             margin-bottom: 10px;
             color: white;
+            text-align: center;
         }
 
         p {
@@ -78,15 +79,23 @@
             color: #fff;
         }
         .bottom-containt {
-            
-            border: 2px solid #737f86 ;
-            padding: 5rem 7rem;
+            width: 81%;
+            border: 2px solid #737f86;
+            padding: 0rem 2rem;
             border-radius: 12px;
+            height: 35%;
+            align-items: center;
         }
+
+        #met{
+            max-height: 14rem;
+        }
+
         .meeting-list {
             display: flex;
             flex-direction: column;
             margin-top: 20px;
+            overflow-y: scroll;
          }
 
         .meeting-list ul {
@@ -95,6 +104,7 @@
             margin: 0;
             display:flex;
             flex-direction:column;
+
         }
 
         .meeting-list li {
@@ -116,15 +126,21 @@
         .meetingbtn{
             display: flex;
             margin-bottom:1rem;
+            align-items: center;
+            justify-content: space-around;
         }
 
         .right-content{
-            padding: 4rem 7rem;
-            border: 2px solid #737f86 ;
+            padding: 1rem 3rem;
+            border: 2px solid #737f86;
             display: flex;
             align-items: center;
             flex-direction: column;
             border-radius: 12px;
+            margin-top: 1rem;
+            width: 77%;
+            overflow-y: auto;
+            max-height: 44%;
         }
 
         .meeting-list button,.logout {
@@ -179,7 +195,7 @@
             border-radius: 5px;
         }
 
-        /* Form styles */
+
         form {
             display: flex;
             flex-direction: column;
@@ -243,8 +259,8 @@
         <div class="right-content">
             <h2>Current Time</h2>
             <p th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></p>
+            <h3>Scheduled Meetings</h3>
             <div class="meeting-list">
-                <h3>Scheduled Meetings</h3>
                 <ul>
                     <th:block th:each="meeting : ${scheduledMeetings}">
                         <div class="meetingbtn">
@@ -267,10 +283,11 @@
             </div>
         </div>
         <div class="bottom-containt">
-            <div class="meeting-list">
-                <h3>Meeting invites</h3>
+            <h3>Meeting invites</h3>
+            <div id="met" class="meeting-list">
                 <ul>
                     <th:block th:each="invite : ${invitedMeetings}">
+                        <div class="meetingbtn">
                         <li
                                 th:text="${invite.key.title + ' - ' + invite.key.dateTime + ' - ' + invite.key.host.email}"
                         />
@@ -288,6 +305,7 @@
                                     <button>Decline</button>
                                 </div>
                             </form>
+                        </div>
                         </div>
                     </th:block>
                 </ul>
